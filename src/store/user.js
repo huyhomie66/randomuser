@@ -1,7 +1,6 @@
 import {action, thunk} from 'easy-peasy';
 import {getNewUser} from './services';
 import {setItem, getItem} from '@randomuser/utils/asyncStorage';
-import moment from 'moment';
 
 export default {
   currentUser: {},
@@ -50,7 +49,6 @@ export default {
             dob,
             location: {street, city},
           } = user;
-          console.log(dob);
           const param = {
             gender: {
               title: 'Hi, My name is',
@@ -58,7 +56,7 @@ export default {
             },
             dob: {
               title: 'My birthday is',
-              value: dob,
+              value: new Date(parseInt(dob)).toLocaleDateString(),
             },
             name: {
               title: 'My name is ',
