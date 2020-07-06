@@ -2,7 +2,6 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useState} from 'react';
 import {useStoreActions, useStoreState} from 'easy-peasy';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import CardStack from 'react-native-card-stack-swiper';
 
 const IconRow = ({props, icon, setCurrentField, currentField}) => {
   return (
@@ -77,25 +76,10 @@ export default ({item, carousel}) => {
   const {users} = useStoreState((states) => states.user);
 
   const onSwipe = async () => {
-    carousel.current.snapToNext();
     await getUser();
   };
 
-  return (
-    <CardStack
-      horizontalSwipe={true}
-      onSwipedLeft={onSwipe}
-      onSwipedRight={async (e) => {
-        await addFavoriteUser(users[e]);
-        await onSwipe();
-      }}
-      style={styles.content}
-      ref={(swiper) => {
-        this.swiper = swiper;
-      }}>
-      <UserDescription item={item} icon={icon} props={props} />
-    </CardStack>
-  );
+  return <UserDescription item={item} icon={icon} props={props} />;
 };
 
 const styles = StyleSheet.create({
